@@ -10,6 +10,14 @@ const App = () => {
 
   const double = () => setCount((prevCount) => prevCount * 2);
   const divide = () => setCount((prevCount) => prevCount / 2);
+  const divideThree = () =>
+    setCount((prevCount) => {
+      if (prevCount % 3 === 0) {
+        return prevCount / 3;
+      } else {
+        return prevCount;
+      }
+    });
 
   //Reset時は初期値を渡す
   const reSet = () => setCount(0);
@@ -28,6 +36,7 @@ const App = () => {
       <div>
         <button onClick={double}>x2</button>
         <button onClick={divide}>/2</button>
+        <button onClick={divideThree}>3の倍数時に3で割る</button>
       </div>
       <div>
         <button onClick={reSet}>reset</button>
