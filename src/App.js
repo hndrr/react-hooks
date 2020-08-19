@@ -1,43 +1,25 @@
 import React, { useState } from "react";
 
-const App = () => {
-  const [count, setCount] = useState(0);
-  const inCrement = () => setCount(count + 1);
-  const deCrement = () => setCount(count - 1);
-  //setCount() に関数を渡せる引数は任意
-  const inCrement2 = () => setCount((prevCount) => prevCount + 2);
-  const deCrement2 = () => setCount((prevCount) => prevCount - 2);
-
-  const double = () => setCount((prevCount) => prevCount * 2);
-  const divide = () => setCount((prevCount) => prevCount / 2);
-  const divideThree = () =>
-    //三項演算子
-    setCount((prevCount) => (prevCount % 3 === 0 ? prevCount / 3 : prevCount));
-
-  //Reset時は初期値を渡す
-  const reSet = () => setCount(0);
+const App = (props) => {
+  //初期値を渡す
+  const [name, setName] = useState(props.name);
+  const [price, setPrice] = useState(props.price);
 
   return (
-    <div className="App">
-      {count}
-      <div>
-        <button onClick={inCrement}>+1</button>
-        <button onClick={deCrement}>-1</button>
-      </div>
-      <div>
-        <button onClick={inCrement2}>+2</button>
-        <button onClick={deCrement2}>-2</button>
-      </div>
-      <div>
-        <button onClick={double}>x2</button>
-        <button onClick={divide}>/2</button>
-        <button onClick={divideThree}>3の倍数時に3で割る</button>
-      </div>
-      <div>
-        <button onClick={reSet}>reset</button>
-      </div>
-    </div>
+    <>
+      <p>
+        現在の{name}は{price}円です。
+      </p>
+      <button onClick={() => setPrice((prevPrice) => prevPrice + 1)}>+1</button>
+      <button onClick={() => setPrice((prevPrice) => prevPrice - 1)}>-1</button>
+      <button onClick={() => setPrice(props.price)}>reset</button>
+    </>
   );
+};
+
+App.defaultProps = {
+  name: "",
+  price: 1000,
 };
 
 export default App;
