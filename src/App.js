@@ -11,13 +11,8 @@ const App = () => {
   const double = () => setCount((prevCount) => prevCount * 2);
   const divide = () => setCount((prevCount) => prevCount / 2);
   const divideThree = () =>
-    setCount((prevCount) => {
-      if (prevCount % 3 === 0) {
-        return prevCount / 3;
-      } else {
-        return prevCount;
-      }
-    });
+    //三項演算子
+    setCount((prevCount) => (prevCount % 3 === 0 ? prevCount / 3 : prevCount));
 
   //Reset時は初期値を渡す
   const reSet = () => setCount(0);
