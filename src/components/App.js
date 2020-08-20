@@ -1,7 +1,7 @@
 import React, { useReducer, useState } from "react";
 import reducer from "../reducers";
+import Event from "./Event";
 import { Container, Form, Table, Button } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
   const [state, dispatch] = useReducer(reducer, []);
@@ -24,7 +24,6 @@ const App = () => {
     //  body:'bbb'
     //}
   };
-  console.log(state);
 
   return (
     <Container fluid>
@@ -70,12 +69,10 @@ const App = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
+          {state.map((event, index) => (
+            //Eventコンポーネント内にpropsでeventとdispatch関数を渡す
+            <Event key={index} event={event} dispatch={dispatch} />
+          ))}
         </tbody>
       </Table>
     </Container>
