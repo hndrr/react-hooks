@@ -4,7 +4,12 @@ import { Button } from "react-bootstrap";
 const Event = ({ dispatch, event }) => {
   const id = event.id;
   const handleClickDeleteButton = () => {
-    dispatch({ type: "DELETE_EVENT", id });
+    const result = window.confirm(
+      `ID:${id}のイベントを本当に削除しても良いですか`
+    );
+    if (result) {
+      dispatch({ type: "DELETE_EVENT", id });
+    }
   };
 
   return (

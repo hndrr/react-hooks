@@ -11,19 +11,22 @@ const App = () => {
   const addEvent = (e) => {
     e.preventDefault();
     console.log({ title, body });
-    dispatch({
-      type: "CREATE_EVENT",
-      title,
-      body,
-    });
+    dispatch({ type: "CREATE_EVENT", title, body });
     setTitle("");
     setBody("");
-    //action = {
-    //  type:'CREATE_EVENT',
-    //  title:'aaaa',
-    //  body:'bbb'
-    //}
+    //action = {  type:'CREATE_EVENT',  title:'aaaa',  body:'bbb' }
   };
+
+  const deleteAllEvents = (e) => {
+    e.preventDefault();
+    const result = window.confirm("全てのイベントを本当に削除しても良いですか");
+    if (result) {
+      dispatch({ type: "DELETE_ALL_EVENTS" });
+    }
+  };
+
+  const unCreatable = title === "" || body === "";
+  const unDeletable = state.length === 0;
 
   return (
     <Container fluid>
@@ -52,10 +55,16 @@ const App = () => {
           />
         </Form.Group>
 
-        <Button variant="primary" onClick={addEvent}>
+        <Button variant="primary" onClick={addEvent} disabled={unCreatable}>
           イベント作成
         </Button>
-        <Button variant="danger">イベント削除</Button>
+        <Button
+          variant="danger"
+          onClick={deleteAllEvents}
+          disabled={unDeletable}
+        >
+          全イベント削除
+        </Button>
       </Form>
 
       <h4>イベント一覧</h4>
@@ -70,7 +79,6 @@ const App = () => {
         </thead>
         <tbody>
           {state.map((event, index) => (
-            //Eventコンポーネント内にpropsでeventとdispatch関数を渡す
             <Event key={index} event={event} dispatch={dispatch} />
           ))}
         </tbody>
