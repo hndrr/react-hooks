@@ -6,7 +6,10 @@ import AppContext from "../contexts/AppContext";
 import { Container } from "react-bootstrap";
 
 const App = () => {
-  const [state, dispatch] = useReducer(reducer, []);
+  const intialState = {
+    events: [],
+  };
+  const [state, dispatch] = useReducer(reducer, intialState);
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>
